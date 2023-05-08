@@ -95,13 +95,13 @@
 
       for (var i = 0; i < 10; i++) {
         var name = names[i].value;
-        var adr = adrs[i].value;
+        var adr = parseInt(adrs[i].value);
 
         players.push({ name: name, adr: adr });
       };
 
       players.sort(function(a, b) {
-        return a.adr - b.adr;
+        return b.adr - a.adr;
       });
 
       team_A = [];
