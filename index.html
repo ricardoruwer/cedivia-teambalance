@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <title>Cê divia balancear o time</title>
+
+    <style>
+      .body {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .row {
+        display: flex;
+        margin-bottom: 20px;
+      }
+
+      .column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .column:first-of-type {
+        margin-right: 10px
+      }
+
+      .input {
+        margin: 2px 0;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body class="body">
+    <form>
+      <div class="row">
+        <section class="column">
+          <label>Atletas</label>
+          <input type="text" class="input" required name="name[]" />
+          <input type="text" class="input" required name="name[]" />
+          <input type="text" class="input" required name="name[]" />
+          <input type="text" class="input" required name="name[]" />
+          <input type="text" class="input" required name="name[]" />
+          <input type="text" class="input" required name="name[]" />
+          <input type="text" class="input" required name="name[]" />
+          <input type="text" class="input" required name="name[]" />
+          <input type="text" class="input" required name="name[]" />
+          <input type="text" class="input" required name="name[]" />
+        </section>
+
+        <section class="column">
+          <label>ADR</label>
+          <input type="number" class="input" required name="adr[]" />
+          <input type="number" class="input" required name="adr[]" />
+          <input type="number" class="input" required name="adr[]" />
+          <input type="number" class="input" required name="adr[]" />
+          <input type="number" class="input" required name="adr[]" />
+          <input type="number" class="input" required name="adr[]" />
+          <input type="number" class="input" required name="adr[]" />
+          <input type="number" class="input" required name="adr[]" />
+          <input type="number" class="input" required name="adr[]" />
+          <input type="number" class="input" required name="adr[]" />
+        </section>
+      </div>
+
+      <input type="submit" value="Gerar times" class="submit" />
+    </form>
+
+    <div class="teams hidden">
+      <section class="team-a">
+        <h3>Seleção A:</h3>
+        <div class="result"></div>
+      </section>
+
+      <section class="team-b">
+        <h3>Seleção B:</h3>
+        <div class="result"></div>
+      </section>
+    </div>
+  </body>
+
+  <script>
+    var form = document.querySelector(".submit");
+
+    form.addEventListener("click", function(e) {
+      e.preventDefault();
+
+      var names = document.getElementsByName("name[]");
+      var adrs = document.getElementsByName("adr[]");
+      var players = [];
+
+      for (var i = 0; i < 10; i++) {
+        var name = names[i].value;
+        var adr = adrs[i].value;
+
+        players.push({ name: name, adr: adr });
+      };
+
+      players.sort(function(a, b) {
+        return a.adr - b.adr;
+      });
+
+      team_a = [];
+      team_b = [];
+
+      players.forEach(function(player, index) {
+        if ((index % 2) == 1) {
+          team_a.push(player);
+        } else {
+          team_b.push(player);
+        }
+      });
+
+      team_a.forEach(function(player) {
+        document.querySelector(".team-a .result").innerHTML += "<p>⭐ " + player.name + "</p>";
+      });
+
+      team_b.forEach(function(player) {
+        document.querySelector(".team-b .result").innerHTML += "<p>⭐ " + player.name + "</p>";
+      });
+
+      document.querySelector(".teams").classList.remove("hidden");
+    })
+  </script>
+</html>
