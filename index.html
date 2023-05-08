@@ -50,7 +50,7 @@
         </section>
 
         <section class="column">
-          <label>ADR</label>
+          <label>ADR / Nota</label>
           <input type="number" class="input" required name="adr[]" />
           <input type="number" class="input" required name="adr[]" />
           <input type="number" class="input" required name="adr[]" />
@@ -86,6 +86,9 @@
     form.addEventListener("click", function(e) {
       e.preventDefault();
 
+      document.querySelector(".team-a .result").innerHTML = "";
+      document.querySelector(".team-b .result").innerHTML = "";
+
       var names = document.getElementsByName("name[]");
       var adrs = document.getElementsByName("adr[]");
       var players = [];
@@ -101,22 +104,25 @@
         return a.adr - b.adr;
       });
 
-      team_a = [];
-      team_b = [];
+      team_A = [];
+      team_B = [];
 
-      players.forEach(function(player, index) {
-        if ((index % 2) == 1) {
-          team_a.push(player);
-        } else {
-          team_b.push(player);
-        }
-      });
+      team_A.push(players[0]);
+      team_B.push(players[1]);
+      team_B.push(players[2]);
+      team_A.push(players[3]);
+      team_B.push(players[4]);
+      team_A.push(players[5]);
+      team_B.push(players[6]);
+      team_A.push(players[7]);
+      team_B.push(players[8]);
+      team_A.push(players[9]);
 
-      team_a.forEach(function(player) {
+      team_A.forEach(function(player) {
         document.querySelector(".team-a .result").innerHTML += "<p>⭐ " + player.name + "</p>";
       });
 
-      team_b.forEach(function(player) {
+      team_B.forEach(function(player) {
         document.querySelector(".team-b .result").innerHTML += "<p>⭐ " + player.name + "</p>";
       });
 
